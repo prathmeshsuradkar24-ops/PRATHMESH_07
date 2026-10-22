@@ -1,0 +1,356 @@
+/* ========================================================
+   AIRPORT OPERATIONS - ADVANCED ANALYTICS & AGENT TIMELINE (FE-4, FE-6, FE-7)
+   ======================================================== */
+
+/* Multi-Agent Workflow Timeline (FE-4) */
+.workflow-control-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.workflow-selector-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.workflow-selector-group select {
+  padding: 8px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  color: #0f172a;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.agent-timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.agent-stage-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.agent-stage-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+.agent-stage-card.status-active {
+  border-color: #3b82f6;
+  background: linear-gradient(180deg, #f8faff 0%, #ffffff 100%);
+}
+
+.stage-step-number {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.stage-step-number.research { background: #dbeafe; color: #1e40af; }
+.stage-step-number.analysis { background: #ede9fe; color: #6b21a8; }
+.stage-step-number.resource { background: #fef3c7; color: #92400e; }
+.stage-step-number.decision { background: #dcfce7; color: #166534; }
+
+.agent-stage-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.agent-stage-header h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.stage-status-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.stage-status-badge.Completed { background: #dcfce7; color: #15803d; }
+.stage-status-badge.Running { background: #eff6ff; color: #2563eb; }
+.stage-status-badge.Pending-Approval,
+.stage-status-badge.Pending { background: #fef3c7; color: #b45309; }
+.stage-status-badge.Error,
+.stage-status-badge.Failed { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
+.stage-status-badge.Warning { background: #fef3c7; color: #d97706; border: 1px solid #fde68a; }
+.stage-status-badge.Blocked { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+
+.agent-stage-card.status-error {
+  border-color: #f87171;
+  background: linear-gradient(180deg, #fef2f2 0%, #ffffff 100%);
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.08);
+}
+
+.agent-error-alert {
+  margin-top: 10px;
+  padding: 8px 10px;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  font-size: 11px;
+  color: #991b1b;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.agent-role-desc {
+  font-size: 11px;
+  color: #64748b;
+  margin: 0 0 14px;
+  line-height: 1.4;
+}
+
+.tools-count-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #bfdbfe;
+  cursor: pointer;
+  width: 100%;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.tools-count-badge:hover {
+  background: #dbeafe;
+}
+
+/* Tool execution details accordion / list */
+.tools-execution-list {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.tool-run-item {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tool-run-item.tool-error {
+  border-color: #fca5a5;
+  background: #fff5f5;
+}
+
+.tool-error-msg {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #b91c1c;
+  background: #fee2e2;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.workflow-error-banner {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #991b1b;
+  font-size: 12px;
+}
+
+/* ========================================================
+   DELAY PREDICTION PANEL (FE-7)
+   ======================================================== */
+.prediction-panel-root {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+  margin-bottom: 24px;
+}
+
+.prediction-results-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  margin: 20px 0;
+}
+
+.prediction-score-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.prob-meter-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 8px;
+}
+
+.prob-meter-number {
+  font-size: 44px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.expected-minutes-label {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-top: 12px;
+}
+
+/* SHAP Contributing Factors Horizontal Bars */
+.shap-factors-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.shap-factor-row {
+  background: #ffffff;
+  border: 1px solid #edf2f7;
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.shap-factor-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.shap-factor-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.shap-factor-effect {
+  font-size: 12px;
+  font-weight: 800;
+  color: #b91c1c;
+}
+
+.shap-factor-effect.negative {
+  color: #15803d;
+}
+
+.shap-factor-desc {
+  font-size: 11px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* Recharts Delay Analytics Section (FE-6) */
+.analytics-section-root {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+  margin-bottom: 24px;
+}
+
+.analytics-grid-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 16px;
+}
+
+.chart-card-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.chart-card-title {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.chart-card-subtitle {
+  margin: 0 0 14px;
+  font-size: 11px;
+  color: #64748b;
+}
+
+@media (max-width: 1024px) {
+  .agent-timeline-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .prediction-results-grid {
+    grid-template-columns: 1fr;
+  }
+  .analytics-grid-two {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .agent-timeline-grid {
+    grid-template-columns: 1fr;
+  }
+}
