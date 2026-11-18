@@ -1,0 +1,48 @@
+﻿# Environment variables and secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+
+# Python virtual environments
+venv/
+.venv/
+**/venv/
+**/.venv/
+
+# Python cache and testing
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Frontend dependencies
+node_modules/
+**/node_modules/
+
+# Build files
+dist/
+build/
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+
+# IDE files
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.bak
+tempCodeRunnerFile.py
+
+# OS files
+.DS_Store
+Thumbs.db
